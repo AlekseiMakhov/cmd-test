@@ -15,6 +15,10 @@ import VueDadata from "vue-dadata";
 export default {
   name: "VueDadata",
   methods: {
+    /**
+     * Функция принимает данные о геопозиции при клике на подсказку,
+     * отправляет в родительский компонент
+     */
     suggestion: function () {
       const responseData = JSON.parse(event.target.response).suggestions[0]
         .data;

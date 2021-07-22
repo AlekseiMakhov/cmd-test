@@ -14,10 +14,9 @@
     />
     <span class="form__error-text">{{ this.errors.name.errorMessage }}</span>
     <label for="address" class="form__label">Адрес:</label>
+    <!-- компонент для ввода адреса с подсказками -->
     <VueDadata :address="address" @selectSuggestion="handleDadataResponse" />
-    <label for="date" class="form__label"
-      >Дата:</label
-    >
+    <label for="date" class="form__label">Дата:</label>
     <input
       type="date"
       class="form__input"
@@ -58,17 +57,20 @@ export default {
   components: { VueDadata },
   data: function () {
     return {
-      name: "",
-      address: "",
-      date: "",
-      errors: { name: {}, date: {} },
-      today: getDates().today,
-      maxDate: getDates().maxDate,
-      formIsValid: false,
-      submitResult: {},
+      name: "", // Фамилия Имя Отчество
+      address: "", // адрес
+      date: "", // дата вызова врача
+      errors: { name: {}, date: {} }, // ошибки валидации
+      today: getDates().today, // сегодняшняя дата
+      maxDate: getDates().maxDate, // макс. дата, доступная для вызова
+      formIsValid: false, // флаг валидности полей ввода
+      submitResult: {}, // результат после обработки данных полей ввода
     };
   },
   methods: {
+    /**
+     * Функция для валидации полей ввода ФИО и даты для отображения текста ошибки
+     */
     validate: function () {
       const inputElement = event.target;
       const name = inputElement.name;
@@ -83,20 +85,28 @@ export default {
       this.formIsValid = Object.values(this.errors).every(
         (item) => item.isValid
       );
-    //   console.log(this.formIsValid, "form");
+      //   console.log(this.formIsValid, "form");
       return this.errors;
     },
+    /**
+     * Передача данных ввода в функцию проверки,
+     * передача результата проверки в вышестоящий компонент для управления видимостью формы
+     */
     formSubmit: function () {
-      event.preventDefault();
+      event.preventDefault(); // отмена стандартного действия
       this.submitResult = handleUserData({
         name: this.name,
         address: this.address,
         recordDate: this.date,
       });
       if (!this.submitResult.isError) {
-        this.$emit("toggleForm", this.submitResult.result);
+        this.$emit("toggleForm", this.submitResult.result); // отправляем данные наверх
       }
     },
+    /**
+     * Функция принимает данные из дочернего компонента от сервиса dadata и присваивает
+     * в локальную переменную текущего компонента
+     */
     handleDadataResponse: function (data) {
       this.address = data;
     },
@@ -106,8 +116,6 @@ export default {
 
 <style lang="scss" scoped>
 .form {
-  /* width: 500px; */
-  /* max-width: calc(100% - 40px); */
   justify-self: center;
   position: relative;
   display: flex;

@@ -27,14 +27,18 @@ export default {
   name: "PageContent",
   data: function () {
     return {
-      formVisible: true,
-      recordNumber: "",
+      formVisible: true, // флаг видимости формы
+      recordNumber: "", // номер записи, отображаемый пользователю
     };
   },
   components: {
     Form,
   },
   methods: {
+    /**
+     * Функция для управления видимостью формы,
+     * также принимает данные (номер записи) из дочернего компонента
+     */
     toggleForm: function (data) {
       this.formVisible = !this.formVisible;
       this.recordNumber = data;
