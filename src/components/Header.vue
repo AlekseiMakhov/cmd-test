@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <a href="https://www.cmd-online.ru">
+    <a href="/">
       <div class="header__logo"></div>
     </a>
   </header>
@@ -21,7 +21,7 @@ export default {
   &__logo {
     background-position: center;
     justify-self: flex-start;
-    width: 245px;
+    width: 132px;
     height: 42px;
     object-fit: cover;
     background-size: cover;
