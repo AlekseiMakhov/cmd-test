@@ -1,4 +1,4 @@
-export const DAYS_TO_MAXDATE = 14 // количество дней для определения самой поздней даты
+export const DAYS_TO_MAXDATE = 14 // getRange of the dates
 
 export const translatedLetters = {
     'а': 'A', 'б': 'B',
@@ -18,4 +18,4 @@ export const translatedLetters = {
     'ы': 'I', 'ь': '-',
     'э': 'E', 'ю': 'Yu',
     'я': 'Ya'
-} // Объект для транслитерации ФИО на латинницу
+}

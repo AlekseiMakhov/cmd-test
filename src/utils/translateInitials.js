@@ -1,12 +1,5 @@
-import { translatedLetters } from '../config/constants'
+import { translatedLetters } from '@/config/constants'
 
-/**
- * Функция принимает ФИО в кириллице, возвращает инициалы в латиннице, формирует 
- * ошибку в случае недопустимого ввода
- * 
- * @param {string} name - ФИО, введенные пользователем в форме
- * @returns {object} 
- */
 function translateInitials(name) {
     let isError = false,    // флаг ошибки
         initials = ''       // инициалы на латиннице
