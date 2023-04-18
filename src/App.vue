@@ -1,24 +1,22 @@
 <template>
   <div id="app">
-    <Header />
-    <PageContent />
+    <app-header />
+    <page-content />
   </div>
 </template>
 
-<script>
-import './assets/fonts/Manrope.css'
-import Header from "./components/Header.vue";
+<script lang="js">
+import AppHeader from "./components/AppHeader.vue";
 import PageContent from "./components/PageContent.vue";
 
 export default {
   name: "App",
   components: {
-    Header,
+    AppHeader,
     PageContent,
   },
 };
 </script>
-
 <style>
 #app {
   font-family: Manrope, Helvetica, Arial, sans-serif;

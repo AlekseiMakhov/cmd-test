@@ -5,29 +5,29 @@
     </a>
   </header>
 </template>
-
 <script>
 export default {
-  name: "Header",
+  name: "AppHeader",
 };
 </script>
-
 <style lang="scss" scoped>
+@import '@/assets/_variables';
+
 .header {
   margin: 0;
-  padding: 20px 30px;
+  padding: 1rem 2rem;
   display: flex;
 
   &__logo {
     background-position: center;
     justify-self: flex-start;
-    width: 132px;
-    height: 42px;
+    width: 8rem;
+    height: 2.5rem;
     object-fit: cover;
     background-size: cover;
     background-image: url("../assets/images/logo.svg");
     opacity: 1;
-    transition: 0.3s;
+    transition: $duration;
 
     &:hover {
       opacity: 0.7;
@@ -35,13 +35,13 @@ export default {
   }
 }
 
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 35rem) {
   .header {
-    padding: 15px 20px;
+    padding: 1rem 1.25rem;
 
     &__logo {
-      width: 79px;
-      height: 24px;
+      width: 5rem;
+      height: 1.5rem;
       background-image: url("../assets/images/logo_mob.svg");
     }
   }

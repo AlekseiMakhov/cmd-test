@@ -1,138 +1,1 @@
-<template>
-  <main class="page-content">
-    <div v-if="this.formVisible">
-      <h1 class="page-content__title">Вызов врача на дом:</h1>
-      <Form @toggleForm="toggleForm" />
-    </div>
-    <div v-else class="page-content__success-container">
-      <img
-        src="../assets/images/success.svg"
-        alt="success.svg"
-        class="page-content__success-icon"
-      />
-      <h1 class="page-content__title">
-        Вызов врача успешно зарегистрирован в системе, номер записи:
-      </h1>
-      <p class="page-content__text">{{ this.recordNumber }}</p>
-      <button class="page-content__button" type="button" @click="toggleForm">
-        Вызвать на другую дату
-      </button>
-    </div>
-  </main>
-</template>
-
-<script>
-import Form from "./Form";
-export default {
-  name: "PageContent",
-  data: function () {
-    return {
-      formVisible: true, // флаг видимости формы
-      recordNumber: "", // номер записи, отображаемый пользователю
-    };
-  },
-  components: {
-    Form,
-  },
-  methods: {
-    /**
-     * Функция для управления видимостью формы,
-     * также принимает данные (номер записи) из дочернего компонента
-     */
-    toggleForm: function (data) {
-      this.formVisible = !this.formVisible;
-      this.recordNumber = data;
-    },
-  },
-};
-</script>
-
-<style lang="scss" scoped>
-.page-content {
-  display: flex;
-  height: calc(100vh - 86px);
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-
-  &__title {
-    width: 500px;
-    font-size: 24px;
-    line-height: 36px;
-    color: #003594;
-    font-weight: 500;
-    margin: 50px 0;
-    text-align: center;
-  }
-
-  &__success-container {
-    margin: 50px 0 0;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  &__success-icon {
-    width: 100px;
-    background-size: contain;
-  }
-
-  &__button {
-    margin-top: 30px;
-    width: 300px;
-    height: 48px;
-    padding: 0;
-    font-size: 16px;
-    position: relative;
-    cursor: pointer;
-    text-align: center;
-    background-color: white;
-    color: #00a9e0;
-    transition: all 0.25s ease-in-out;
-    border: 1px solid #00a9e0;
-    border-radius: 24px;
-
-    &:hover {
-      background-color: #00a9e0;
-      color: #fff;
-      transition: all 0.25s ease-in-out;
-    }
-  }
-  &__text {
-    width: calc(100% - 40px);
-    font-size: 20px;
-    line-height: 36px;
-    color: #000;
-    font-weight: 500;
-    margin: 50px 0;
-    text-align: center;
-  }
-}
-
-@media screen and (max-width: 560px) {
-  .page-content {
-    height: calc(100vh - 54px);
-
-    &__title {
-      width: calc(100% - 40px);
-      font-size: 16px;
-      line-height: 20px;
-      color: #003594;
-      font-weight: 500;
-      margin: 30px auto;
-      text-align: center;
-    }
-
-    &__success-icon {
-      width: 60px;
-    }
-
-    &__text {
-      font-size: 16px;
-      line-height: 22px;
-      margin-top: 10px;
-    }
-  }
-}
-</style>
+<template>  <main class="page-content">    <div v-if="loading" class="vld-parent">      <v-loading        :active="loading"        :opacity="30"        color="#00a9e0"        is-full-page        loader="spinner"        lock-scroll      />    </div>    <div v-else-if="formVisible">      <h1 class="page-content__title">Вызов врача на дом:</h1>      <input-form @toggle-form="toggleForm" />    </div>    <div v-else class="page-content__success-container">      <img        src="../assets/images/success.svg"        alt="success.svg"        class="page-content__success-icon"      />      <h1 class="page-content__title">        Вызов врача успешно зарегистрирован в системе, номер записи:      </h1>      <p class="page-content__text">{{ recordNumber }}</p>      <button        class="page-content__button"        type="button"        @click="toggleForm"      >        Вызвать на другую дату      </button>    </div>  </main></template><script>import InputForm from "./InputForm.vue";import VLoading from 'vue-loading-overlay';export default {  name: "PageContent",  data: function () {    return {      formVisible: true, // флаг видимости формы      recordNumber: "", // номер записи, отображаемый пользователю      loading: false,    };  },  components: {    InputForm,    VLoading,  },  methods: {    toggleForm: function (payload) {      this.setLoadingSimulation();      this.formVisible = !this.formVisible;      this.recordNumber = payload;    },    setLoadingSimulation: function () {      this.loading = true;      setTimeout(() => {        this.loading = false;      }, 1000);    },  },};</script><style lang="scss" scoped>@import '@/assets/_variables';.vld-parent {  position: absolute;  z-index: 11;}.page-content {  display: flex;  height: calc(100vh - 5.425rem);  flex-direction: column;  justify-content: flex-start;  align-items: center;  &__title {    width: 31.25rem;    font-size: 1.25rem;    line-height: 3rem;    color: $primary-80;    font-weight: 500;    margin: 3rem 0;    text-align: center;  }  &__success-container {    margin: 3rem 0 0;    width: 100%;    display: flex;    flex-direction: column;    align-items: center;  }  &__success-icon {    width: 6rem;    background-size: contain;  }  &__button {    margin-top: 2rem;    width: 18.5rem;    height: 3rem;    padding: 0;    font-size: 1rem;    position: relative;    cursor: pointer;    text-align: center;    background-color: $neutral-0;    color: $primary-40;    transition: all $duration ease-in-out;    border: 1px solid $primary-40;    border-radius: $radius;    &:hover {      background-color: $primary-40;      color: $neutral-0;      transition: all $duration ease-in-out;    }  }  &__text {    width: calc(100% - 2.5rem);    font-size: 1.25rem;    line-height: 3rem;    color: $neutral-100;    font-weight: 500;    margin: 3rem 0;    text-align: center;  }}@media screen and (max-width: 35rem) {  .page-content {    height: calc(100vh - 3.5rem);    &__title {      width: calc(100% - 2.5rem);      font-size: 1rem;      line-height: 1.25;      color: $primary-80;      font-weight: 500;      margin: 2.5rem auto;      text-align: center;    }    &__success-icon {      width: 5.75rem;    }    &__text {      font-size: 1rem;      line-height: 1.35;      margin-top: 0.625rem;    }  }}</style>
